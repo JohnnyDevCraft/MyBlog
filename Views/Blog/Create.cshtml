@@ -1,0 +1,18 @@
+@model BlogEntry
+
+ <h2>New Blog Entry</h2>
+
+ <form method="POST" asp-controller="Blog" asp-action="Create">
+  <div class="form-group">
+    <label asp-for="Title"></label>
+    <input asp-for="Title" class="form-control" id="Title" placeholder="Blog Title">
+  </div>
+  <div class="form-group">
+    <label asp-for="Description"></label>
+    <input asp-for="Description" class="form-control"  placeholder="Description">
+  </div>
+  
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+ <a asp-action="Index" asp-controller="Blog" >Back</a>
+

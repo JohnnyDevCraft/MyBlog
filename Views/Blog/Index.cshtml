@@ -1,0 +1,24 @@
+@model List<BlogEntry>
+
+ <h2>Blog Entries</h2>
+
+ <table>
+     <tr>
+         <th>Title</th>
+         <th>Description</th>
+         <th>Created By</th>
+         <th>Date Created</th>
+     </tr>
+     @if(Model != null){
+        @foreach(var blog in Model){
+            <tr>
+                <td>blog.Title</td>
+                <td>blog.Description</td>
+                <td>blog.CreatedBy</td>
+                <td>blog.DateCreated</td>
+            </tr>
+        }
+     }
+ </table>
+ <a asp-action="Create" asp-controller="Blog" >Create New</a>
+

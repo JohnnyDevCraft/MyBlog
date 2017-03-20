@@ -4,9 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MySQL.Data;
+using MySQL.Data.EntityFrameworkCore;
+using MySQL.Data.EntityFrameworkCore.Extensions;
+using Microsoft.EntityFrameworkCore.Extensions;
+using Microsoft.EntityFrameworkCore;
+using MyBlog.DataLayer;
+using MyBlog.Abstractions.DataLayer;
 
 namespace MyBlog
 {
@@ -26,8 +34,11 @@ namespace MyBlog
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   var conn = Configuration.GetConnectionString("sqlite");   
+            RepoFactory.Conn = conn;  
             // Add framework services.
+            services.AddDbContext<AppDbContext>(c=> c.UseSqlite(conn));
+            services.AddTransient<IRepoFactory, RepoFactory>();
             services.AddMvc();
         }
 
@@ -48,6 +59,7 @@ namespace MyBlog
             }
 
             app.UseStaticFiles();
+            
 
             app.UseMvc(routes =>
             {
