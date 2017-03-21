@@ -36,7 +36,17 @@ namespace MyBlog.DataLayer
             return db.Categories.ToList();
         }
 
-        public Category GetCategory(int id)
+		public Category GetCategory(string name)
+		{
+			return db.Categories.FirstOrDefault(c => c.Name == name);
+		}
+
+		public List<Category> SearchCategory(string search)
+		{
+			return db.Categories.Where(c => c.Name.ToLower().Contains(search.ToLower())).ToList();
+		}
+
+		public Category GetCategory(int id)
         {
             return db.Categories.Find(id);
         }

@@ -7,6 +7,8 @@ namespace MyBlog.Abstractions.DataLayer
     {
         List<Category> GetAllCategories();
         Category GetCategory(int id);
+		Category GetCategory(string name);
+		List<Category> SearchCategory(string search);
         Category CreateCategory(Category category);
         bool DeleteCategory(int id);
         Category UpdateCategory(Category category);
